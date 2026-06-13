@@ -1,0 +1,415 @@
+/* ============================================
+   SONGO — Version Réseau — Style complet
+   ============================================ */
+
+*, *::before, *::after {
+  margin: 0; padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(160deg, #1a0f0a 0%, #2d1a0e 50%, #1a0f0a 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f0e6d3;
+}
+
+/* === SYSTÈME D'ÉCRANS === */
+.screen { display: none; width: 100%; justify-content: center; }
+.screen.active { display: flex; }
+
+.container {
+  width: 95%;
+  max-width: 680px;
+  padding: 24px 20px;
+}
+
+/* === HEADER === */
+.game-header {
+  text-align: center;
+  margin-bottom: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.game-header h1 {
+  font-size: 2.4em;
+  letter-spacing: 6px;
+  color: #E8C06A;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  width: 100%;
+}
+.subtitle {
+  font-size: 0.82em;
+  color: rgba(240,230,211,0.45);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  width: 100%;
+  margin-top: -10px;
+}
+
+/* Meta (code + rôle affichés dans l'écran de jeu) */
+.game-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  padding: 6px 14px;
+}
+.game-meta-label {
+  font-size: 0.7em;
+  color: rgba(240,230,211,0.45);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.game-meta-code {
+  font-size: 1.1em;
+  font-weight: 700;
+  color: #E8C06A;
+  letter-spacing: 3px;
+  font-family: 'Courier New', monospace;
+}
+.game-meta-role {
+  font-size: 0.95em;
+  font-weight: 600;
+  color: #f0e6d3;
+}
+
+/* === LOBBY === */
+.lobby-container { max-width: 620px; }
+
+.lobby-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+@media(max-width: 500px) {
+  .lobby-cards { grid-template-columns: 1fr; }
+}
+
+.lobby-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 22px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  text-align: center;
+}
+.lobby-card-icon {
+  font-size: 2em;
+}
+.lobby-card h3 {
+  font-size: 1.05em;
+  color: #E8C06A;
+}
+.lobby-card p {
+  font-size: 0.82em;
+  color: rgba(240,230,211,0.55);
+  line-height: 1.5;
+}
+
+.code-input-wrap {
+  width: 100%;
+}
+.code-input {
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  font-size: 1.3em;
+  font-weight: 700;
+  letter-spacing: 6px;
+  font-family: 'Courier New', monospace;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 10px;
+  color: #E8C06A;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.code-input:focus {
+  border-color: rgba(232,192,106,0.6);
+}
+.code-input::placeholder {
+  color: rgba(240,230,211,0.25);
+  letter-spacing: 4px;
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 11px;
+  background: rgba(232,192,106,0.2);
+  color: #E8C06A;
+  border: 1px solid rgba(232,192,106,0.5);
+  border-radius: 10px;
+  font-size: 0.95em;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+.btn-primary:hover {
+  background: rgba(232,192,106,0.35);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  width: 100%;
+  padding: 11px;
+  background: rgba(255,255,255,0.06);
+  color: #f0e6d3;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  font-size: 0.95em;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+.btn-secondary:hover {
+  background: rgba(255,255,255,0.12);
+  transform: translateY(-1px);
+}
+
+.error-msg {
+  min-height: 20px;
+  text-align: center;
+  font-size: 0.85em;
+  color: #E07B3A;
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+/* === ÉCRAN D'ATTENTE === */
+.waiting-container { max-width: 440px; }
+
+.waiting-box {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 18px;
+  padding: 36px 28px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+.waiting-icon { font-size: 2.5em; }
+.waiting-box h2 { font-size: 1.4em; color: #E8C06A; }
+.waiting-box p  { font-size: 0.88em; color: rgba(240,230,211,0.6); }
+
+.game-code-display {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(0,0,0,0.3);
+  border: 2px solid rgba(232,192,106,0.5);
+  border-radius: 12px;
+  padding: 14px 20px;
+}
+#display-code {
+  font-family: 'Courier New', monospace;
+  font-size: 2.2em;
+  font-weight: 900;
+  letter-spacing: 8px;
+  color: #E8C06A;
+}
+.btn-copy {
+  background: none;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 8px;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 1.1em;
+  transition: all 0.2s;
+}
+.btn-copy:hover { background: rgba(255,255,255,0.1); }
+
+.waiting-hint {
+  font-size: 0.82em;
+  color: rgba(240,230,211,0.4);
+  font-style: italic;
+}
+
+/* Spinner d'attente */
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid rgba(232,192,106,0.2);
+  border-top-color: #E8C06A;
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* === BARRE INFO === */
+.info-bar {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  padding: 10px 18px;
+  margin-bottom: 14px;
+  text-align: center;
+}
+#current-player {
+  font-size: 1em;
+  font-weight: 600;
+  color: #E8C06A;
+}
+.message {
+  font-size: 0.85em;
+  color: #E07B3A;
+  min-height: 18px;
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+/* === SCORES === */
+.scores { display: flex; gap: 10px; margin-bottom: 14px; }
+.score-card {
+  flex: 1;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  transition: all 0.25s;
+}
+.score-card.active {
+  background: rgba(232,192,106,0.18);
+  border-color: rgba(232,192,106,0.5);
+}
+.player-name  { display: block; font-size: 0.78em; color: rgba(240,230,211,0.6); margin-bottom: 4px; }
+.score-value  { display: block; font-size: 2em; font-weight: 700; color: #E8C06A; line-height: 1; }
+.score-label  { display: block; font-size: 0.7em; color: rgba(240,230,211,0.4); margin-top: 2px; }
+
+/* === PLATEAU === */
+.board-wrap {
+  background: #6B3D1E;
+  border-radius: 22px;
+  padding: 16px 10px;
+  border: 4px solid #4A2810;
+  box-shadow: inset 0 2px 8px rgba(0,0,0,0.4), 0 8px 32px rgba(0,0,0,0.6);
+  margin-bottom: 14px;
+  background-image:
+    repeating-linear-gradient(
+      90deg, transparent, transparent 40px,
+      rgba(0,0,0,0.04) 40px, rgba(0,0,0,0.04) 41px
+    );
+}
+.row { display: flex; justify-content: center; gap: 6px; margin: 3px 0; }
+.board-separator {
+  height: 8px;
+  margin: 6px 16px;
+  background: linear-gradient(to right, transparent, rgba(0,0,0,0.25), transparent);
+  border-radius: 4px;
+}
+
+/* === CASES === */
+.cell {
+  width: 74px; height: 74px;
+  background: radial-gradient(ellipse at 40% 35%, #C8956A, #8B5630);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; position: relative;
+  transition: transform 0.15s, filter 0.15s;
+  border: 2px solid #7A4020;
+  box-shadow:
+    inset 0 3px 6px rgba(255,255,255,0.15),
+    inset 0 -3px 6px rgba(0,0,0,0.35),
+    0 3px 8px rgba(0,0,0,0.4);
+  overflow: hidden;
+}
+.cell.playable {
+  border-color: #E8C06A;
+  box-shadow:
+    inset 0 3px 6px rgba(255,255,255,0.2),
+    inset 0 -3px 6px rgba(0,0,0,0.25),
+    0 0 12px rgba(232,192,106,0.4),
+    0 3px 8px rgba(0,0,0,0.4);
+}
+.cell.playable:hover { transform: scale(1.08) translateY(-2px); filter: brightness(1.15); }
+.cell.empty          { opacity: 0.4; cursor: not-allowed; filter: saturate(0.5); }
+.cell.disabled       { cursor: not-allowed; filter: brightness(0.7); }
+.cell.not-my-turn    { cursor: not-allowed; }
+.cell.highlight {
+  border-color: #7BC67E;
+  box-shadow: inset 0 3px 6px rgba(255,255,255,0.2), 0 0 14px rgba(123,198,126,0.6);
+}
+.cell.capture-flash {
+  border-color: #E24B4A;
+  animation: captureAnim 0.5s ease;
+}
+@keyframes captureAnim {
+  0%   { transform: scale(1);    box-shadow: 0 0 0 rgba(226,75,74,0); }
+  40%  { transform: scale(1.18); box-shadow: 0 0 20px rgba(226,75,74,0.8); }
+  100% { transform: scale(1);    box-shadow: 0 0 0 rgba(226,75,74,0); }
+}
+.seeds-container { width: 64px; height: 64px; position: relative; }
+.cell-label {
+  position: absolute; bottom: 5px; right: 7px;
+  font-size: 8px; color: rgba(255,255,255,0.35); font-weight: 600;
+  pointer-events: none;
+}
+.seed {
+  position: absolute; border-radius: 50%;
+  transition: all 0.2s ease;
+  box-shadow:
+    inset -2px -2px 3px rgba(0,0,0,0.45),
+    inset 1px 1px 2px rgba(255,255,255,0.25),
+    0 1px 3px rgba(0,0,0,0.4);
+}
+
+/* Indicateur "pas mon tour" */
+.my-turn-indicator {
+  text-align: center;
+  font-size: 0.8em;
+  color: rgba(240,230,211,0.4);
+  font-style: italic;
+  margin-bottom: 8px;
+  min-height: 18px;
+}
+
+/* === BANNIÈRE VICTOIRE === */
+.winner-banner {
+  display: none;
+  text-align: center;
+  background: rgba(232,192,106,0.1);
+  border: 1px solid rgba(232,192,106,0.35);
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 14px;
+  animation: fadeIn 0.4s ease;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.trophy { font-size: 2.5em; margin-bottom: 8px; }
+.winner-banner h2 { font-size: 1.3em; color: #E8C06A; margin-bottom: 6px; }
+.winner-banner p  { font-size: 0.85em; color: rgba(240,230,211,0.6); }
+
+/* === BOUTON RETOUR === */
+.btn-row { text-align: center; }
+.btn-restart {
+  padding: 10px 28px;
+  background: rgba(232,192,106,0.15);
+  color: #E8C06A;
+  border: 1px solid rgba(232,192,106,0.4);
+  border-radius: 10px;
+  font-size: 0.95em;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+.btn-restart:hover { background: rgba(232,192,106,0.28); transform: translateY(-1px); }

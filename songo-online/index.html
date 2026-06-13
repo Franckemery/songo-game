@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Songo — Version Réseau</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- =============================================
+       ÉCRAN 1 : LOBBY (choix créer / rejoindre)
+       ============================================= -->
+  <div id="screen-lobby" class="screen active">
+    <div class="container lobby-container">
+
+      <header class="game-header">
+        <h1>🌍 SONGO</h1>
+        <p class="subtitle">Mode Réseau</p>
+      </header>
+
+      <div class="lobby-cards">
+
+        <!-- Créer une partie -->
+        <div class="lobby-card">
+          <div class="lobby-card-icon">✨</div>
+          <h3>Créer une partie</h3>
+          <p>Un code unique est généré automatiquement. Partage-le à ton adversaire.</p>
+          <button class="btn-primary" onclick="createGame()">Créer la partie</button>
+        </div>
+
+        <!-- Rejoindre une partie -->
+        <div class="lobby-card">
+          <div class="lobby-card-icon">🔗</div>
+          <h3>Rejoindre une partie</h3>
+          <p>Entre le code de 5 caractères donné par ton adversaire.</p>
+          <div class="code-input-wrap">
+            <input
+              type="text"
+              id="join-code"
+              class="code-input"
+              maxlength="5"
+              placeholder="Ex: C23AF"
+              oninput="this.value=this.value.toUpperCase()"
+            >
+          </div>
+          <button class="btn-secondary" onclick="joinGame()">Rejoindre</button>
+        </div>
+
+      </div>
+
+      <div id="lobby-error" class="error-msg"></div>
+
+    </div>
+  </div>
+
+  <!-- =============================================
+       ÉCRAN 2 : ATTENTE (après création, avant que le 2e rejoigne)
+       ============================================= -->
+  <div id="screen-waiting" class="screen">
+    <div class="container waiting-container">
+
+      <header class="game-header">
+        <h1>🌍 SONGO</h1>
+      </header>
+
+      <div class="waiting-box">
+        <div class="waiting-icon">⏳</div>
+        <h2>Partie créée !</h2>
+        <p>Donne ce code à ton adversaire :</p>
+
+        <div class="game-code-display">
+          <span id="display-code">-----</span>
+          <button class="btn-copy" onclick="copyCode()" title="Copier le code">📋</button>
+        </div>
+
+        <p class="waiting-hint">En attente que l'adversaire rejoigne...</p>
+        <div class="spinner"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =============================================
+       ÉCRAN 3 : JEU (plateau actif)
+       ============================================= -->
+  <div id="screen-game" class="screen">
+    <div class="container">
+
+      <header class="game-header">
+        <div class="game-meta">
+          <span class="game-meta-label">Partie</span>
+          <span class="game-meta-code" id="game-code-display">-----</span>
+        </div>
+        <div class="game-meta">
+          <span class="game-meta-label">Rôle</span>
+          <span class="game-meta-role" id="my-role-display">---</span>
+        </div>
+      </header>
+
+      <!-- Barre d'info -->
+      <div class="info-bar">
+        <div id="current-player">En attente...</div>
+        <div id="message" class="message"></div>
+      </div>
+
+      <!-- Scores -->
+      <div class="scores">
+        <div class="score-card" id="score-nord">
+          <span class="player-name">Joueur 2 · Nord</span>
+          <span class="score-value" id="val-nord">0</span>
+          <span class="score-label">graines</span>
+        </div>
+        <div class="score-card" id="score-sud">
+          <span class="player-name">Joueur 1 · Sud</span>
+          <span class="score-value" id="val-sud">0</span>
+          <span class="score-label">graines</span>
+        </div>
+      </div>
+
+      <!-- Plateau -->
+      <div class="board-wrap">
+        <div class="row" id="row-nord"></div>
+        <div class="board-separator"></div>
+        <div class="row" id="row-sud"></div>
+      </div>
+
+      <!-- Bannière fin de partie -->
+      <div class="winner-banner" id="winner-banner">
+        <div class="trophy">🏆</div>
+        <h2 id="winner-text"></h2>
+        <p id="winner-scores"></p>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-restart" onclick="goToLobby()">↩ Retour au lobby</button>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
